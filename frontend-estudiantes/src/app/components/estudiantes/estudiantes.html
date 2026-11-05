@@ -1,0 +1,85 @@
+<div style="display: flex; gap: 20px; padding: 20px; font-family: sans-serif;">
+
+  <!-- FORMULARIO -->
+  <div style="flex: 1; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+    <h3>Formulario de Estudiantes</h3>
+    <form #estudianteForm="ngForm" (ngSubmit)="guardarEstudiante(estudianteForm)">
+
+      <input type="hidden" name="_id" [(ngModel)]="estudianteSeleccionado._id">
+      
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; margin-bottom:5px;">Nombre:</label>
+        <input type="text" name="name" [(ngModel)]="estudianteSeleccionado.name" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+      
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; margin-bottom:5px;">Edad:</label>
+        <input type="number" name="age" [(ngModel)]="estudianteSeleccionado.age" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; margin-bottom:5px;">Ciudad:</label>
+        <input type="text" name="city" [(ngModel)]="estudianteSeleccionado.city" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+      
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; margin-bottom:5px;">Puesto (Position):</label>
+        <input type="text" name="position" [(ngModel)]="estudianteSeleccionado.position" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+      
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; margin-bottom:5px;">Oficina:</label>
+        <input type="text" name="office" [(ngModel)]="estudianteSeleccionado.office" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+      
+      <div style="margin-bottom: 15px;">
+        <label style="display:block; margin-bottom:5px;">Salario:</label>
+        <input type="number" name="salary" [(ngModel)]="estudianteSeleccionado.salary" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+      
+      <button type="submit" style="background: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">Guardar</button>
+      <button type="button" (click)="limpiarFormulario(estudianteForm)" style="background: #6c757d; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; margin-left: 10px;">Limpiar</button>
+    </form>
+  </div>
+  
+  <!-- TABLA DE DATOS -->
+  <div style="flex: 2; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+    <!-- Contenedor flex para alinear el título y el botón de actualización -->
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3>Lista de Estudiantes</h3>
+      <!-- 👇 NUEVO BOTÓN DE ACTUALIZACIÓN 👇 -->
+      <button type="button" (click)="obtenerEstudiantes()" style="background: #17a2b8; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+        🔄 Actualizar Lista
+      </button>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+      <thead>
+        <tr style="background-color: #f2f2f2; text-align: left;">
+          <th style="border: 1px solid #ddd; padding: 8px;">Nombre</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Edad</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Ciudad</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Puesto</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Oficina</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Salario</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of listaEstudiantes">
+          <td style="border: 1px solid #ddd; padding: 8px;">{{emp.name}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">{{emp.age}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">{{emp.city}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">{{emp.position}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">{{emp.office}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">${{emp.salary}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">
+            <button (click)="editarEstudiante(emp)" style="background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-right: 5px;">Editar</button>
+            <button (click)="eliminarEstudiante(emp._id)" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
